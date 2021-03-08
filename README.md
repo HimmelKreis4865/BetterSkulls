@@ -9,7 +9,7 @@ An advanced Skull plugin for PocketMine-MP that allows spawning the heads of oth
 - [x] Despawns on liquid flooding
 #### (Planned features)
 - [ ] Player blacklist
-- [ ] Customizable 
+- [ ] 128px support
 
 ## Bugs / suggestions found?
 Let me know it in a new [Issue](https://github.com/HimmelKreis4865/BetterSkulls/issues/new/choose)!
