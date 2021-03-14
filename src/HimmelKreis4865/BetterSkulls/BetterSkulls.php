@@ -15,6 +15,9 @@ use pocketmine\plugin\PluginBase;
 use pocketmine\utils\TextFormat;
 use function base64_encode;
 use function is_string;
+use function str_split;
+use function stream_get_line;
+use function strlen;
 
 class BetterSkulls extends PluginBase {
 	/** @var string the geometry used for creating a 2 layer head model */
@@ -55,10 +58,18 @@ class BetterSkulls extends PluginBase {
 	 */
 	final public static function constructPlayerHeadItem(string $name, Skin $skin): Item {
 		$item = Item::get(Item::SKULL, 3);
-		$item->setCustomBlockData(new CompoundTag("skull", [
+		$lengths = str_split(base64_encode($skin->getSkinData()), 32767);
+		$tag = new CompoundTag("skull", [
 			new StringTag("skull_name", $name),
-			new StringTag("skull_data", base64_encode($skin->getSkinData()))
-		]));
+			new StringTag("skull_data", array_shift($lengths))
+		]);
+		foreach ($lengths as $key => $length) {
+			// preventing random errors
+			if (strlen($length) === 0) break;
+			
+			$tag->setString("skull_data_" . ($key + 1), $length);
+		}
+		$item->setCustomBlockData($tag);
 		$item->setCustomName(TextFormat::GOLD . $name . "§7's Skull");
 		return $item;
 	}

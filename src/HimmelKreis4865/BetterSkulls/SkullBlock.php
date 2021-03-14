@@ -14,6 +14,7 @@ use pocketmine\Player;
 use ReflectionClass;
 use ReflectionException;
 use function base64_decode;
+use function var_dump;
 
 class SkullBlock extends Skull {
 	/** @var array $directions */
@@ -61,7 +62,13 @@ class SkullBlock extends Skull {
 		$property->setAccessible(true);
 		$yaw = $property->getValue($tile);
 		
-		$data = base64_decode($tag->getString("skull_data"));
+		$data = $tag->getString("skull_data");
+		
+		for ($i = 1; $i < 32; $i++) {
+			if ($tag->hasTag("skull_data_" . $i, StringTag::class)) $data .= $tag->getString("skull_data_" . $i);
+		}
+		
+		$data = base64_decode($data);
 		
 		$position = $this->add(0.5, 0, 0.5);
 		$nbt = Entity::createBaseNBT($position, null, $this->directions[$yaw]);
