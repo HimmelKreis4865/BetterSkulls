@@ -15,6 +15,7 @@ use pocketmine\plugin\PluginBase;
 use pocketmine\utils\TextFormat;
 use function base64_encode;
 use function is_string;
+use function str_replace;
 use function str_split;
 use function stream_get_line;
 use function strlen;
@@ -70,7 +71,7 @@ class BetterSkulls extends PluginBase {
 			$tag->setString("skull_data_" . ($key + 1), $length);
 		}
 		$item->setCustomBlockData($tag);
-		$item->setCustomName(TextFormat::GOLD . $name . "§7's Skull");
+		$item->setCustomName(str_replace("{player}", $name, ConfigManager::getInstance()->format));
 		return $item;
 	}
 	

@@ -6,6 +6,10 @@
 # 1 hour = 60 * 60 = 3600
 cooldown: 86400
 
+# select the format of the item name
+# {player} will be replaced with the skull's owner
+format: "§6{player}§7's Skull"
+
 messages:
   no-permission: "§cYou don't have the permission to execute this command, Sorry!"
   under-cooldown: "§cYou have to wait §e{days} §cDays, §e{hours} §cHours, §e{minutes} §cMinutes, §e{seconds} §cSeconds until you can use this command again!"

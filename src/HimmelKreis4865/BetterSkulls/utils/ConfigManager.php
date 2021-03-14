@@ -18,6 +18,8 @@ class ConfigManager {
 	/** @var float|int $cooldown */
 	public $cooldown = 26 * 60 * 60;
 	
+	public $format = "§6{player}§7's Skull";
+	
 	public function __construct() {
 		$this->config = new Config(BetterSkulls::getInstance()->getDataFolder() . "config.yml", Config::YAML);
 		$this->init();
