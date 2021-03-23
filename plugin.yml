@@ -1,7 +1,7 @@
 name: BetterSkulls
 author: HimmelKreis4865
 main: HimmelKreis4865\BetterSkulls\BetterSkulls
-version: 1.0.0
+version: 1.0.1
 api: 3.0.0
 permissions:
   skull.command:
