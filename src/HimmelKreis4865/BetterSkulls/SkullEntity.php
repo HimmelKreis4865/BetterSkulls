@@ -12,10 +12,12 @@ class SkullEntity extends Human {
 	/** @var float $height */
 	public $height = 0.025;
 	
+	public $canCollide = false;
+	
 	protected function initEntity(): void {
 		$this->setMaxHealth(1);
 		$this->setImmobile();
-		$this->setScale(1.13);
+		$this->setScale(1.1275);
 		parent::initEntity();
 	}
 	
@@ -41,5 +43,16 @@ class SkullEntity extends Human {
 	 */
 	public function onUpdate(int $currentTick): bool {
 		return true;
+	}
+	
+	/**
+	 * Added to make blocks under the entity placeable
+	 * 
+	 * @internal
+	 *
+	 * @return bool
+	 */
+	public function canBeCollidedWith(): bool {
+		return false;
 	}
 }
