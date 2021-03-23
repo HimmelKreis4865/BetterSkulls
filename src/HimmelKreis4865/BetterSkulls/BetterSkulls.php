@@ -30,7 +30,6 @@ class BetterSkulls extends PluginBase {
 		$this->getServer()->getPluginManager()->registerEvents(new EventListener(), $this);
 		Entity::registerEntity(SkullEntity::class, true, ["minecraft:skull_entity", "SkullEntity"]);
 		BlockFactory::registerBlock(new SkullBlock(), true);
-		$this->saveResource("config.yml");
 		$this->getConfig();
 		$this->getServer()->getCommandMap()->register("BetterSkulls", new BetterSkullCommand());
 	}
