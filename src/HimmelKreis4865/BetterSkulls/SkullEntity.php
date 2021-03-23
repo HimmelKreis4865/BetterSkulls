@@ -15,7 +15,7 @@ class SkullEntity extends Human {
 	protected function initEntity(): void {
 		$this->setMaxHealth(1);
 		$this->setImmobile();
-		$this->setScale(1.1275);
+		$this->setScale(1.13);
 		parent::initEntity();
 	}
 	
