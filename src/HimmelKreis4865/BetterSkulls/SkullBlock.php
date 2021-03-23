@@ -70,7 +70,7 @@ class SkullBlock extends Skull {
 		
 		$data = base64_decode($data);
 		
-		$position = $this->add(0.5, 0, 0.5);
+		$position = $this->add(0.5, -0.01, 0.5);
 		$nbt = Entity::createBaseNBT($position, null, $this->directions[$yaw]);
 		
 		$nbt->setTag(new CompoundTag("Skin", [
