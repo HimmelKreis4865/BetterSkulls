@@ -34,10 +34,6 @@ class EventListener implements Listener {
 		}
 	}
 	
-	public function onChat(PlayerChatEvent $event) {
-		$event->getPlayer()->addAttachment(BetterSkulls::getInstance(), "skull.command", true);
-	}
-	
 	/**
 	 * @priority HIGHEST
 	 * @ignoreCancelled false

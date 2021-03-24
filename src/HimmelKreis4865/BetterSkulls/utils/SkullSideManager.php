@@ -3,7 +3,6 @@
 namespace HimmelKreis4865\BetterSkulls\utils;
 
 use pocketmine\math\Vector3;
-use function var_dump;
 
 final class SkullSideManager {
 	
@@ -27,9 +26,18 @@ final class SkullSideManager {
 		15 => 157.5,
 	];
 	
+	/**
+	 * Returns additions for a specific face & rotation as array [yaw: float, position: Vector3]
+	 *
+	 * @internal
+	 *
+	 * @param int $face
+	 * @param int $skullRotation
+	 *
+	 * @return array
+	 */
 	public static function addAdditions(int $face, int $skullRotation): array {
 		if ($face === Vector3::SIDE_UP) return [self::$directions[$skullRotation], new Vector3(0.5, 0, 0.5)];
-		var_dump($face);
 		$baseVector = new Vector3(0, 0.23, 0);
 		
 		switch ($face) {
@@ -56,19 +64,21 @@ final class SkullSideManager {
 		return [self::getFaceYaw($face), $baseVector];
 	}
 	
+	/**
+	 * Returns the needed yaw of faces
+	 *
+	 * @internal
+	 *
+	 * @param int $face
+	 *
+	 * @return int
+	 */
 	private static function getFaceYaw(int $face): int {
 		switch ($face) {
-			case Vector3::SIDE_SOUTH:
-				var_dump("south");
-				return 0;
-			case Vector3::SIDE_EAST:
-				var_dump("east");
-				return 270;
-			case Vector3::SIDE_WEST:
-				var_dump("west");
-				return 90;
+			case Vector3::SIDE_SOUTH: return 0;
+			case Vector3::SIDE_EAST: return 270;
+			case Vector3::SIDE_WEST: return 90;
 		}
-		var_dump("north");
 		return 180;
 	}
 }

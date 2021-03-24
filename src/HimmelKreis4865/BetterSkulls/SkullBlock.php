@@ -11,12 +11,10 @@ use pocketmine\math\Vector3;
 use pocketmine\nbt\tag\ByteArrayTag;
 use pocketmine\nbt\tag\CompoundTag;
 use pocketmine\nbt\tag\StringTag;
-use pocketmine\network\mcpe\protocol\ProtocolInfo;
 use pocketmine\Player;
 use ReflectionClass;
 use ReflectionException;
 use function base64_decode;
-use function var_dump;
 
 class SkullBlock extends Skull {
 	/**

@@ -13,7 +13,6 @@ use pocketmine\nbt\tag\StringTag;
 use pocketmine\Player;
 use pocketmine\plugin\PluginBase;
 use function base64_encode;
-use function boolval;
 use function is_string;
 use function str_replace;
 use function str_split;
