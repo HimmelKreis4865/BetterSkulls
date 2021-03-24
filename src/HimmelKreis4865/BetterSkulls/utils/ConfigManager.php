@@ -30,12 +30,12 @@ class ConfigManager {
     /**
      * @var string
      */
-    public $useBlacklist = "false";
+    public $useBlacklist = false;
 
     /**
      * @var string
      */
-    public $blacklist = "['Player1', 'Player2']";
+    public $blacklist = [];
 
     /**
      * ConfigManager constructor.
