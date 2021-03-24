@@ -21,26 +21,17 @@ class ConfigManager {
 	
 	/** @var float|int $cooldown */
 	public $cooldown = 26 * 60 * 60;
-
-    /**
-     * @var string
-     */
-    public $format = "§6{player}§7's Skull";
-
-    /**
-     * @var string
-     */
-    public $useBlacklist = false;
-
-    /**
-     * @var string
-     */
-    public $blacklist = [];
-
-    /**
-     * ConfigManager constructor.
-     */
-    public function __construct() {
+	
+	/** @var string $format */
+	public $format = "§6{player}§7's Skull";
+	
+	/** @var string[] $blacklist */
+	public $blacklist = [];
+	
+	/**
+	 * ConfigManager constructor.
+	 */
+	public function __construct() {
 		$this->config = new Config(BetterSkulls::getInstance()->getDataFolder() . "config.yml", Config::YAML);
 		$this->init();
 	}
