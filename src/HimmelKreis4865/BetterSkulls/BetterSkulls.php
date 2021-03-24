@@ -12,12 +12,11 @@ use pocketmine\nbt\tag\CompoundTag;
 use pocketmine\nbt\tag\StringTag;
 use pocketmine\Player;
 use pocketmine\plugin\PluginBase;
-use pocketmine\utils\TextFormat;
 use function base64_encode;
+use function boolval;
 use function is_string;
 use function str_replace;
 use function str_split;
-use function stream_get_line;
 use function strlen;
 
 class BetterSkulls extends PluginBase {
@@ -101,5 +100,18 @@ class BetterSkulls extends PluginBase {
 		if (!is_string($player)) return;
 		
 		PlayerConfigManager::getInstance()->setCooldown($player, time() + intval(ConfigManager::getInstance()->cooldown));
+	}
+	
+	/**
+	 * Returns whether a player is blacklisted or not
+	 *
+	 * @api
+	 *
+	 * @param string $playerName
+	 *
+	 * @return bool
+	 */
+	public function isBlacklisted(string $playerName): bool {
+		return in_array($playerName, ConfigManager::getInstance()->blacklist);
 	}
 }

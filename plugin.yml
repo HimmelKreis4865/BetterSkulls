@@ -1,7 +1,7 @@
 name: BetterSkulls
 author: HimmelKreis4865
 main: HimmelKreis4865\BetterSkulls\BetterSkulls
-version: 1.0.0
+version: 1.0.1
 api: 3.0.0
 permissions:
   skull.command:
@@ -9,4 +9,7 @@ permissions:
     description: Allows players to give themself skulls of themself / other online players
   skull.command.bypass:
     description: Allows players to give themself skulls with no cooldown
+    default: op
+  skull.blacklist.bypass:
+    description: Blacklist bypass permission
     default: op

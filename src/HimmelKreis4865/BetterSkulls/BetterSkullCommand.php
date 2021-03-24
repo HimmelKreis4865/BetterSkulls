@@ -25,7 +25,9 @@ class BetterSkullCommand extends Command implements PluginIdentifiableCommand {
 	 * @param CommandSender $sender
 	 * @param string $commandLabel
 	 * @param array $args
+	 *
 	 * @return mixed|void
+	 *
 	 * @throws Exception
 	 */
 	public function execute(CommandSender $sender, string $commandLabel, array $args) {
@@ -46,6 +48,11 @@ class BetterSkullCommand extends Command implements PluginIdentifiableCommand {
 		
 		if (($target = Server::getInstance()->getPlayer($args[0] ?? $sender->getName())) === null) {
 			$sender->sendMessage(str_replace("{name}", $args[0] ?? $sender->getName(), ConfigManager::getInstance()->messages["not-found"] ?? ""));
+			return;
+		}
+		
+		if (!$sender->hasPermission("skull.blacklist.bypass") and !$sender->hasPermission("skull.blacklist." . $target->getName() . ".bypass") and BetterSkulls::getInstance()->isBlacklisted($target->getName()) and $sender->getName() !== $target->getName()) {
+			$sender->sendMessage(str_replace("{name}", $target->getName(), ConfigManager::getInstance()->messages["skull-blocked"] ?? ""));
 			return;
 		}
 		
