@@ -10,9 +10,8 @@ cooldown: 86400
 # {player} will be replaced with the skull's owner
 format: "§6{player}§7's Skull"
 
-#blacklist [true | false]
-useBlacklist: "false"
-#here you can set blacklisted players, nobody can get a blacklisted head (this feature don't works if the head is already given)
+# Put an array of players whose heads can't be given without permissions
+# If you want to disable blacklisting, remove all contents of the array
 blacklist: ["Player1", "Player2"]
 
 messages:
@@ -20,5 +19,5 @@ messages:
   under-cooldown: "§cYou have to wait §e{days} §cDays, §e{hours} §cHours, §e{minutes} §cMinutes, §e{seconds} §cSeconds until you can use this command again!"
   not-found: "§cWe couldn't find a player called §e{name}§c, are you sure this player is online?"
   success: "§aYou successfully got the skull of player §e{name}§a!"
-  skull-blocked: "§cThe skull from §e{name} $cis blocked! You can't give you a blocked skull!"
+  skull-blocked: "§cThe skull from §e{name} §cis blocked! You can't give you a blocked skull!"
 ...
