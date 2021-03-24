@@ -47,7 +47,7 @@ class SkullEntity extends Human {
 	
 	/**
 	 * Added to make blocks under the entity placeable
-	 * 
+	 *
 	 * @internal
 	 *
 	 * @return bool

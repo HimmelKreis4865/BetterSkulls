@@ -2,6 +2,7 @@
 
 namespace HimmelKreis4865\BetterSkulls;
 
+use HimmelKreis4865\BetterSkulls\utils\SkullSideManager;
 use pocketmine\block\Block;
 use pocketmine\block\Skull;
 use pocketmine\entity\Entity;
@@ -10,6 +11,7 @@ use pocketmine\math\Vector3;
 use pocketmine\nbt\tag\ByteArrayTag;
 use pocketmine\nbt\tag\CompoundTag;
 use pocketmine\nbt\tag\StringTag;
+use pocketmine\network\mcpe\protocol\ProtocolInfo;
 use pocketmine\Player;
 use ReflectionClass;
 use ReflectionException;
@@ -17,26 +19,6 @@ use function base64_decode;
 use function var_dump;
 
 class SkullBlock extends Skull {
-	/** @var array $directions */
-	private $directions = [
-		0 => 180,
-		1 => 202.5,
-		2 => 225,
-		3 => 247.5,
-		4 => 270,
-		5 => 292.5,
-		6 => 315,
-		7 => 337.5,
-		8 => 0,
-		9 => 22.5,
-		10 => 45,
-		11 => 67.5,
-		12 => 90,
-		13 => 112.5,
-		14 => 135,
-		15 => 157.5,
-	];
-	
 	/**
 	 * @param Item $item
 	 * @param Block $blockReplace
@@ -50,7 +32,7 @@ class SkullBlock extends Skull {
 	 * @throws ReflectionException
 	 */
 	public function place(Item $item, Block $blockReplace, Block $blockClicked, int $face, Vector3 $clickVector, Player $player = null): bool {
-		if ($face !== Vector3::SIDE_UP) return false;
+		if ($face === Vector3::SIDE_DOWN) return false;
 		
 		if (!parent::place($item, $blockReplace, $blockClicked, $face, $clickVector, $player)) return false;
 		
@@ -62,20 +44,23 @@ class SkullBlock extends Skull {
 		$property->setAccessible(true);
 		$yaw = $property->getValue($tile);
 		
-		$data = $tag->getString("skull_data");
+		$skinData = $tag->getString("skull_data");
 		
 		for ($i = 1; $i < 32; $i++) {
-			if ($tag->hasTag("skull_data_" . $i, StringTag::class)) $data .= $tag->getString("skull_data_" . $i);
+			if ($tag->hasTag("skull_data_" . $i, StringTag::class)) $skinData .= $tag->getString("skull_data_" . $i);
 		}
 		
-		$data = base64_decode($data);
+		$skinData = base64_decode($skinData);
 		
-		$position = $this->add(0.5, -0.01, 0.5);
-		$nbt = Entity::createBaseNBT($position, null, $this->directions[$yaw]);
+		$data = SkullSideManager::addAdditions($face, $yaw);
+		
+		$position = $this->add($data[1]);
+		
+		$nbt = Entity::createBaseNBT($position, null, $data[0]);
 		
 		$nbt->setTag(new CompoundTag("Skin", [
 			new StringTag("Name", "Custom_Head_Layer"),
-			new ByteArrayTag("Data", $data),
+			new ByteArrayTag("Data", $skinData),
 			new ByteArrayTag("CapeData", ""),
 			new StringTag("GeometryName", "geometry.skull"),
 			new ByteArrayTag("GeometryData", BetterSkulls::GEOMETRY)
