@@ -103,7 +103,7 @@ class BetterSkulls extends PluginBase {
 
 	public function useBlacklist(): bool
     {
-        $useBlacklist = $this->getConfig()->get("useBlacklist");
+        $useBlacklist = ConfigManager::getInstance()->useBlacklist;
         if ($useBlacklist == "true") {
             return true;
         } else {
@@ -113,8 +113,8 @@ class BetterSkulls extends PluginBase {
 
 	public function isSkullBlocked(string $playerName): bool
     {
-        $blacklist = $this->getConfig()->get("blacklist");
-        $useBlacklist = $this->getConfig()->get("useBlacklist");
+        $blacklist = ConfigManager::getInstance()->blacklist;
+        $useBlacklist = ConfigManager::getInstance()->useBlacklist;
         if (!$this->useBlacklist()) {
             return false;
         }

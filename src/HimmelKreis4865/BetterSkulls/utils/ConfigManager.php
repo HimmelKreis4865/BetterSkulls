@@ -6,6 +6,10 @@ use HimmelKreis4865\BetterSkulls\BetterSkulls;
 use pocketmine\utils\Config;
 use ReflectionClass;
 
+/**
+ * Class ConfigManager
+ * @package HimmelKreis4865\BetterSkulls\utils
+ */
 class ConfigManager {
 	use InstantiableTrait;
 	
@@ -17,10 +21,26 @@ class ConfigManager {
 	
 	/** @var float|int $cooldown */
 	public $cooldown = 26 * 60 * 60;
-	
-	public $format = "§6{player}§7's Skull";
-	
-	public function __construct() {
+
+    /**
+     * @var string
+     */
+    public $format = "§6{player}§7's Skull";
+
+    /**
+     * @var string
+     */
+    public $useBlacklist = "false";
+
+    /**
+     * @var string
+     */
+    public $blacklist = "['Player1', 'Player2']";
+
+    /**
+     * ConfigManager constructor.
+     */
+    public function __construct() {
 		$this->config = new Config(BetterSkulls::getInstance()->getDataFolder() . "config.yml", Config::YAML);
 		$this->init();
 	}

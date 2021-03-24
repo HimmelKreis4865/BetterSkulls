@@ -56,7 +56,8 @@ class BetterSkullCommand extends Command implements PluginIdentifiableCommand {
 		if (!$sender->hasPermission("skull.command.bypass")) BetterSkulls::getInstance()->refillCooldown($sender);
 		if (BetterSkulls::getInstance()->isSkullBlocked($target->getName())) {
 		    if ($sender->hasPermission("skull.blacklist." . $target->getName() . ".give") || $sender->hasPermission("skull.blacklist.give")) {
-                $sender->getInventory()->addItem(BetterSkulls::constructPlayerHeadItem($target->getName(), $target->getSkin()));
+                if (!$sender->hasPermission("skull.command.bypass")) BetterSkulls::getInstance()->refillCooldown($sender);
+		        $sender->getInventory()->addItem(BetterSkulls::constructPlayerHeadItem($target->getName(), $target->getSkin()));
                 $sender->sendMessage(str_replace("{name}", $target->getName(), ConfigManager::getInstance()->messages["success"] ?? ""));
                 return;
             } else {
@@ -64,6 +65,7 @@ class BetterSkullCommand extends Command implements PluginIdentifiableCommand {
                 return;
             }
         }
+        if (!$sender->hasPermission("skull.command.bypass")) BetterSkulls::getInstance()->refillCooldown($sender);
 		$sender->getInventory()->addItem(BetterSkulls::constructPlayerHeadItem($target->getName(), $target->getSkin()));
 		$sender->sendMessage(str_replace("{name}", $target->getName(), ConfigManager::getInstance()->messages["success"] ?? ""));
 	}

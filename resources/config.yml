@@ -20,5 +20,5 @@ messages:
   under-cooldown: "§cYou have to wait §e{days} §cDays, §e{hours} §cHours, §e{minutes} §cMinutes, §e{seconds} §cSeconds until you can use this command again!"
   not-found: "§cWe couldn't find a player called §e{name}§c, are you sure this player is online?"
   success: "§aYou successfully got the skull of player §e{name}§a!"
-  skull-blocked: "§cThe skull from {player} is blocked! You can't give you a blocked skull!"
+  skull-blocked: "§cThe skull from {name} is blocked! You can't give you a blocked skull!"
 ...
