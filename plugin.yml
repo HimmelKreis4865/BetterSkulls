@@ -10,6 +10,6 @@ permissions:
   skull.command.bypass:
     description: Allows players to give themself skulls with no cooldown
     default: op
-  skull.blacklist.give:
+  skull.blacklist.bypass:
     description: Blacklist bypass permission
     default: op
