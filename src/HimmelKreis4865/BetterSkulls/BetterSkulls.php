@@ -13,6 +13,7 @@ use pocketmine\nbt\tag\StringTag;
 use pocketmine\Player;
 use pocketmine\plugin\PluginBase;
 use function base64_encode;
+use function boolval;
 use function is_string;
 use function str_replace;
 use function str_split;
@@ -100,32 +101,17 @@ class BetterSkulls extends PluginBase {
 		
 		PlayerConfigManager::getInstance()->setCooldown($player, time() + intval(ConfigManager::getInstance()->cooldown));
 	}
-
-	public function useBlacklist(): bool
-    {
-        $useBlacklist = ConfigManager::getInstance()->useBlacklist;
-        if ($useBlacklist == "true") {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-	public function isSkullBlocked(string $playerName): bool
-    {
-        $blacklist = ConfigManager::getInstance()->blacklist;
-        $useBlacklist = ConfigManager::getInstance()->useBlacklist;
-        if (!$this->useBlacklist()) {
-            return false;
-        }
-        if ($this->useBlacklist()) {
-            if (in_array($playerName, $blacklist)) {
-                return true;
-            } else {
-                return false;
-            }
-        } else {
-            return false;
-        }
-    }
+	
+	/**
+	 * Returns whether a player is blacklisted or not
+	 *
+	 * @api
+	 *
+	 * @param string $playerName
+	 *
+	 * @return bool
+	 */
+	public function isBlacklisted(string $playerName): bool {
+		return in_array($playerName, ConfigManager::getInstance()->blacklist);
+	}
 }
