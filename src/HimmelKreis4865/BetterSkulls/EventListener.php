@@ -30,7 +30,9 @@ class EventListener implements Listener {
 				$event->setDrops([BetterSkulls::constructPlayerHeadItem($name, $skull->getSkin())]);
 				
 				$skull->flagForDespawn();
-			}
+			} else {
+                                $event->setDrops([$event->getBlock()->getPickedItem()]);
+                        }
 		}
 	}
 	
